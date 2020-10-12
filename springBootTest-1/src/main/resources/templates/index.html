@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>Home</title>
+</head>
+<body>
+	<h1 th:text="${username}"><span th:text="${email}"></span></h1>님 환영합니다.
+	<form action="/admin.html" th:action="@{/home/admin}" method="get">
+		<button>go admin</button>
+	</form>
+</body>
+</html>

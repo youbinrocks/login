@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Registration</title>
+</head>
+<body>
+	<form th:action="@{/registration}" th:object="${account}" method="post" role="form">
+		<input type="text" th:field="*{email}" placeholder="Email"/>
+		<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+		<input type="text" th:field="*{username}" placeholder="username"/>
+		<label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></label>
+		<input type="text" th:field="*{password}" placeholder="password"/>
+		<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+		<button type="submit">회원가입</button>	
+	</form>
+</body>
+</html>
