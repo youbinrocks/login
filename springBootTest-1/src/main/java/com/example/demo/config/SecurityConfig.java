@@ -19,17 +19,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.demo.handler.CustomAuthFailureHandler;
 import com.example.demo.handler.CustomAuthSuccessHandler;
 import com.example.demo.service.CustomUserDetailService;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * @author Dell
  *
  */
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
@@ -39,6 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private CustomUserDetailService userDetailsService;
 
+	@Autowired
+	private final JwtTokenProvider jwtTokenProvider;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService)
@@ -75,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login")
 				.and()
+			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
 			.exceptionHandling()
 				.accessDeniedPage("/access-denied");
 	}

@@ -7,7 +7,6 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-        
 # ==================================================================
 # Data Source : keep the connection alive if idle for a long time (needed in production)
 # ==================================================================
@@ -51,11 +50,16 @@ spring:
 # ==============================================================
 # = The SQL dialect makes Hibernate generate better SQL for the chosen database
 # ==============================================================
-    database-platform: org.hibernate.dialect.H2Dialect
-    
+    database-platform: org.hibernate.dialect.H2Dialect    
 # ==============================================================
 # = Logging
 # ==============================================================
 logging:
   level:
-    com.demo.security : debug
+    com.demo.security : debug    
+# ==============================================================
+# = YAML
+# ==============================================================
+
+       
+    
